@@ -6,7 +6,9 @@ Parses Firefox databases eg. for digital forensics. Works with Firefox 4 and lat
 Usage:
 
 1) Press Button 'Start'
+
 2) Select path to Firefox Profile
+
 3) Select path where the output files shall be written
 
 FFFE parses (and therefore needs) the following databases:
