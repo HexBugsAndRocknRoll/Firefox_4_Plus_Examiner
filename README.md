@@ -1,7 +1,7 @@
 Firefox_4_Plus_Examiner
 ===================
 
-
+Parses Firefox databases eg. for digital forensics. Works with Firefox 4 and later. 
 
 Usage:
 
@@ -16,3 +16,6 @@ cookies.sqlite
 downloads.sqlite
 formhistory.sqlite
 signons.sqlite
+
+
+Resultion files are TAB separated csv to import in Excel, Open Office etc.
