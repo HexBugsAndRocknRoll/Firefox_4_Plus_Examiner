@@ -1,4 +1,18 @@
-Firefox_4-_Examiner
+Firefox_4_Plus_Examiner
 ===================
 
-Parses Firefox 4+ databases. Press start, select path to Firefox profile (on a live system or exportet from the system under examnination) and path where the output shall be written.). Resultion files are TAB separated csv to import in Excel, Open Office etc.
+
+
+Usage:
+
+1) Press Button 'Start'
+2) Select path to Firefox Profile
+3) Select path where the output files shall be written
+
+FFFE parses (and therefore needs) the following databases:
+
+nplaces.sqlite
+cookies.sqlite
+downloads.sqlite
+formhistory.sqlite
+signons.sqlite
