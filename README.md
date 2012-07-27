@@ -1,7 +1,7 @@
 Firefox_4_Plus_Examiner
 ===================
 
-Parses Firefox databases eg. for digital forensics. Works with Firefox 4 and later. 
+Parses Firefox databases eg. for digital forensics. Works with Firefox 4 and later. Firefox changed the format of its databases in version 4, so some of the older analyzing tools broke.
 
 Usage:
 
