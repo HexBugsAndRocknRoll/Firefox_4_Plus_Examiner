@@ -13,10 +13,14 @@ Usage:
 
 FFFE parses (and therefore needs) the following databases:
 
-nplaces.sqlite
+places.sqlite
+
 cookies.sqlite
+
 downloads.sqlite
+
 formhistory.sqlite
+
 signons.sqlite
 
 
