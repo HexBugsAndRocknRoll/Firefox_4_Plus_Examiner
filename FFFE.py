@@ -7,15 +7,13 @@ shall be written. Output files are TAB separated csv to import in Excel, Open Of
 
 from tkinter.constants import END
 
-
 def get_places(sqlitepath):
     historypath = os.path.join(sqlitepath, "places.sqlite")
     places = {} #Dictionary to take the history
-
     connection = sqlite3.connect(historypath)
     cursor = connection.cursor()
-
     cursor.execute("select last_visit_date, id, url, title, rev_host, visit_count, hidden, typed, favicon_id, frecency, guid from moz_places")
+
     for data in cursor:
         lastvisitunixtime = data[0]
         lastvisitlocaltime = "None"
@@ -27,9 +25,7 @@ def get_places(sqlitepath):
             lastvisitutctime = time.strftime("%d.%m.%Y %H:%M:%S", time.gmtime(int(lastvisitunixtime)))
 
         id = data[1]
-
         url = data[2]
-
         title = data[3]
         if not title:
             title = "None"
@@ -38,15 +34,13 @@ def get_places(sqlitepath):
         if rev_host:
             host = rev_host[::-1]
             if host[0] == ".":
-                host = host[1:]
+                host = host[1:]        
         else:
             rev_host = "None"
             host = "None"
 
         visit_count = data[5]
-
         hidden = data[6]
-
         typed = data[7]
 
         favicon_id = data[8]
@@ -54,7 +48,6 @@ def get_places(sqlitepath):
             favicon_id = "None"
 
         frecency = data[9]
-
         guid = data[10]
 
         places[id] = url, title, rev_host, host, lastvisitlocaltime, lastvisitutctime, visit_count, hidden, typed, favicon_id, frecency, guid
@@ -68,14 +61,11 @@ def get_inputhistory(sqlitepath, places):
     
     connection = sqlite3.connect(historypath)
     cursor = connection.cursor()
-
     cursor.execute("select place_id, input, use_count from moz_inputhistory")
+    
     for data in cursor:
-
         place_id = data[0]
-
         input = data[1]
-
         use_count = data[2]
 
         connected_url = places[place_id][0] # Take the url from the dict "history" with the coresponding place_id and put it in dict inputhistory
@@ -94,12 +84,10 @@ def get_bookmarks(sqlitepath, places):
 
     connection = sqlite3.connect(historypath)
     cursor = connection.cursor()
-
     cursor.execute("select id, type, fk, parent, position, title, keyword_id, folder_type, dateAdded, lastModified, guid from moz_bookmarks")
+ 
     for data in cursor:
-
         id = data[0]
-
         type = data[1]
         if type == 1:
             type = "Normal Bookmark"
@@ -115,13 +103,9 @@ def get_bookmarks(sqlitepath, places):
             fk = places[foreignkey][0]
 
         parent = data [3]
-
         position = data[4]
-
         title = data [5]
-
         keyword_id = data[6]
-
         folder_type = data[7]
 
         dateAddedUnix = data[8]
@@ -135,8 +119,6 @@ def get_bookmarks(sqlitepath, places):
         lastModifiedUTC = time.strftime("%d.%m.%Y %H:%M:%S", time.gmtime(int(lastModifiedUnix)))
 
         guid = data [10]
-
-
         bookmarks[id] = type, fk, parent, position, title, keyword_id, dateAddedUTC, dateAddedlocaltime, lastModifiedUTC, lastModifiedlocaltime, guid
 
     connection.close()
@@ -148,30 +130,22 @@ def get_historyvisits(sqlitepath, places):
 
     connection = sqlite3.connect(historypath)
     cursor = connection.cursor()
-
     cursor.execute("select id, from_visit, place_id, visit_date, visit_type, session from moz_historyvisits")
+
     for data in cursor:
 
         id = data[0]
-
         from_visit = data[1]
-
         place_id = data[2]
-
         visit_date = data [3]
-
         visit_type = data[4]
-
         session = data [5]
-
 
         visit_date = str(int(visit_date/1000000))
         visit_datelocaltime = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime(int(visit_date)))
         visit_dateUTC = time.strftime("%d.%m.%Y %H:%M:%S", time.gmtime(int(visit_date)))
 
         place_id_string = places[place_id][0]
-
-
         historyvisits[id] = from_visit, place_id_string, visit_datelocaltime, visit_dateUTC, visit_type, session
 
     connection.close()
@@ -183,32 +157,20 @@ def get_cookies(sqlitepath):
 
     connection = sqlite3.connect(cookiespath)
     cursor = connection.cursor()
-
     cursor.execute("select id, name, value, host, path, expiry, lastAccessed, isSecure, isHttpOnly, baseDomain, creationTime from moz_cookies")
+
     for data in cursor:
-
         id = data[0]
-
         name = data[1]
-
         value = data[2]
-
         host = data [3]
-
         path = data[4]
-
         expiry = data [5]
-
         lastAccessed = data [6]
-
         isSecure = data [7]
-
         isHttpOnly = data [8]
-
         baseDomain = data [9]
-
         creationTime = data [10]
-
 
         lastAccessed = str(int(lastAccessed/1000000))
         lastAccessedlocaltime = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime(int(lastAccessed)))
@@ -229,10 +191,9 @@ def get_signons(sqlitepath):
 
     connection = sqlite3.connect(signonspath)
     cursor = connection.cursor()
-
     cursor.execute("select id, hostname, httpRealm, formSubmitURL, usernameField, passwordField, encryptedUsername, encryptedPassword, guid, encType, timeCreated,timeLastUsed, timePasswordChanged, timesUsed from moz_logins")
-    for data in cursor:
 
+    for data in cursor:
         id = data[0]
         hostname = data[1]
         httpRealm = data[2]
@@ -271,14 +232,11 @@ def get_disabledHosts(sqlitepath):
 
     connection = sqlite3.connect(signonspath)
     cursor = connection.cursor()
-
     cursor.execute("select id, hostname from moz_disabledHosts")
+ 
     for data in cursor:
-
         id = data[0]
-
         hostname = data[1]
-
         signonsdisabled[id] = hostname
 
     connection.close()
@@ -292,22 +250,15 @@ def get_formhistory(sqlitepath):
     cursor = connection.cursor()
 
     cursor.execute("select id, fieldname, value, timesUsed, firstUsed, lastUsed, guid from moz_formhistory")
+
     for data in cursor:
-
         id = data[0]
-
         fieldname = data[1]
-
         value = data[2]
-
         timesUsed = data [3]
-
         firstUsed = data[4]
-
         lastUsed = data [5]
-
         guid = data [6]
-
 
         firstUsed = str(int(firstUsed/1000000))
         firstUsedlocaltime = time.strftime("%d.%m.%Y %H:%M:%S", time.localtime(int(firstUsed)))
@@ -328,11 +279,9 @@ def get_downloads(sqlitepath):
 
     connection = sqlite3.connect(downloadspath)
     cursor = connection.cursor()
-
     cursor.execute("select id, name, source, target, tempPath, startTime, endTime, state, referrer, entityID, currBytes, maxBytes, mimeType, preferredApplication, preferredAction, autoResume from moz_downloads")
 
     for data in cursor:
-
         id = data[0]
         name = data[1]
         source = data[2]
@@ -373,7 +322,6 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
     for id in places:
         writer.writerow([str(id), places[id][0], places[id][1], places[id][2],places[id][3],places[id][4], places[id][5], places[id][6], places[id][7], places[id][8],places[id][9],places[id][10], places[id][11]])
 
-
     write_to_infoscreen("Writing history file `historyvisits.csv`")
     historyvisitsfile = (os.path.join(outputpath,"historyvisits.csv"))
     writer = csv.writer(open(historyvisitsfile, "w", encoding="utf-8"),"excel-tab")
@@ -381,7 +329,6 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
     for id in historyvisits:
         templist = [str(id), historyvisits[id][0], historyvisits[id][1], historyvisits[id][2],historyvisits[id][3],historyvisits[id][4], historyvisits[id][5]]
         writer.writerow(templist)
-
 
     write_to_infoscreen("Writing history file `inputhistory.csv")
     inputhistoryfile = (os.path.join(outputpath,"inputhistory.csv"))
@@ -391,7 +338,6 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
         templist = [inputhistory[i], inputhistory[i+1], inputhistory[i+2], inputhistory[i+3]]
         writer.writerow(templist)
 
-
     write_to_infoscreen("Writing cookies file `bookmarks.csv'")
     bookmarksfile = (os.path.join(outputpath, "bookmarks.csv"))
     writer = csv.writer(open(bookmarksfile, "w", encoding = "utf-8"),"excel-tab")
@@ -399,14 +345,12 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
     for id in bookmarks:
         writer.writerow([str(id), bookmarks[id][0], bookmarks[id][1], bookmarks[id][2],bookmarks[id][3],bookmarks[id][4], bookmarks[id][5], bookmarks[id][6], bookmarks[id][7], bookmarks[id][8],bookmarks[id][9],bookmarks[id][10]])
 
-
     write_to_infoscreen("Writing cookies file `cookies.csv'")
     cookiesfile = (os.path.join(outputpath,"cookies.csv"))
     writer = csv.writer(open(cookiesfile, "w", encoding = "utf-8"),"excel-tab")
     writer.writerow(["ID", "Name", "Value", "Host", "Path", "Expiry", "Last Accessed Local", "Last Accessed UTC", "Is Secure", "Is HTTP Only", "Base Domain", "Creation Time Local", "Creation Time UTC"])
     for id in cookies:
         writer.writerow([str(id), cookies[id][0], cookies[id][1], cookies[id][2],cookies[id][3],cookies[id][4], cookies[id][5], cookies[id][6], cookies[id][7], cookies[id][8],cookies[id][9],cookies[id][10],cookies[id][11]])
-
 
     write_to_infoscreen("Writing saved logins file `signons.csv'")
     signonsfile = (os.path.join(outputpath,"signons.csv"))
@@ -436,9 +380,8 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
     for id in downloads:
         writer.writerow([str(id), downloads[id][0], downloads[id][1], downloads[id][2],downloads[id][3],downloads[id][4], downloads[id][5], downloads[id][6], downloads[id][7], downloads[id][8],downloads[id][9],downloads[id][10],downloads[id][11],downloads[id][12],downloads[id][13],downloads[id][14],downloads[id][15],downloads[id][16]])
 
-    write_to_infoscreen("Done.\n\nResulting files are tab separated CSV (utf-8 encoded).\n")
+    write_to_infoscreen("\nDone.\n\nResulting files are tab separated CSV (utf-8 encoded).\n")
     
-
     return()
 
 def checkpaths(sqlitepath, outputpath): 
@@ -554,7 +497,6 @@ def run_program():
     downloads = get_downloads(sqlitepath)
     write_to_infoscreen("\nWork done.")
 
-
     writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookies, signonslogin, signonsdisabled, formhistory, downloads)
     #TODO: And Now? What to do after writing files?
     return()
@@ -569,7 +511,6 @@ import tkinter
 import tkinter.scrolledtext
 import tkinter.messagebox
 
-
 global sqlitepath
 global outputpath
 global places#, inputhistory, bookmarks,historyvisits, cookies, signonslogin, signonsdisabled, formhistory, downloads
@@ -581,9 +522,6 @@ window_main = tkinter.Tk()
 window_main.title("Firefox 4+ Examiner")
 window_main.geometry("700x450")
 window_main.minsize(400, 225)
-
-#frame_text = tkinter.Frame(window_main, width = 200, height = 100)
-#frame_text.pack(anchor = "ne", expand=1, fill="both")
 
 text_info = tkinter.scrolledtext.ScrolledText(window_main, width=80, height=10)
 text_info["borderwidth"] = 5
@@ -625,10 +563,8 @@ write_to_infoscreen("~/Library/Mozilla/Firefox/Profiles/<profile folder>\n or \n
 # Main Loop
 window_main.mainloop()
 
-
 checkpaths(sqlitepath, outputpath)
 sys.exit()
-
 
 places = get_places(sqlitepath)
 inputhistory = get_inputhistory(sqlitepath)
@@ -639,10 +575,7 @@ signonslogin = get_signons(sqlitepath)
 signonsdisabled = get_disabledHosts(sqlitepath)
 formhistory = get_formhistory(sqlitepath)
 downloads = get_downloads(sqlitepath)
-
-
 writefiles()
-
 
 
 #TODO: Parse Bookmarks Backupfolder, json files, http://jsonformatter.curiousconcept.com/
