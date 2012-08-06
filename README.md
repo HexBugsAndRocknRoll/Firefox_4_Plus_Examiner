@@ -28,7 +28,7 @@ Resultion files are TAB separated csv to import in Excel, Open Office etc.
 
 Python 3 and Tkinter needet.
 
-For more information how Firefox from Version 4 on stores its data and how to interpret FFFE`s results best, 
+For more information how Firefox from Version 4 on stores its data and how to interpret FFFEs results best, 
 I strongly recommend reading Alexander Bond`s great articles Firefox 4 Browser Forensics Part 1 - 5 at
 
 http://renaissancesecurity.blogspot.com/search/label/firefox%204
