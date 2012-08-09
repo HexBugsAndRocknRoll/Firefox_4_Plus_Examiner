@@ -1,0 +1,1 @@
+Copy the folder anywhere you want and start FFFE.exe. Win32 required.
