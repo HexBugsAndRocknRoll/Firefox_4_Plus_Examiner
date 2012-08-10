@@ -1,1 +1,0 @@
-Unzip, copy folder anywhere you want and start FFFE.exe. Win32 required.

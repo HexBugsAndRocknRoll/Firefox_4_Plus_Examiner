@@ -317,14 +317,14 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
     write_to_infoscreen("\nWriting Output...\n")
     write_to_infoscreen("Writing places file `places.csv'")
     historyvisitsfile = (os.path.join(outputpath,"places.csv"))
-    writer = csv.writer(open(historyvisitsfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(historyvisitsfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "URL", "Title", "Rev Host", "Host", "Last Visit Locale", "LastVisit UTC", "Visit Count", "Hidden", "Typed", "Favicon ID", "Frecency", "GUID"])
     for id in places:
         writer.writerow([str(id), places[id][0], places[id][1], places[id][2],places[id][3],places[id][4], places[id][5], places[id][6], places[id][7], places[id][8],places[id][9],places[id][10], places[id][11]])
 
     write_to_infoscreen("Writing history file `historyvisits.csv`")
     historyvisitsfile = (os.path.join(outputpath,"historyvisits.csv"))
-    writer = csv.writer(open(historyvisitsfile, "w", encoding="utf-8"),"excel-tab")
+    writer = csv.writer(open(historyvisitsfile, "w", encoding="utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "From Visit", "Place ID", "Visit Date Local", "Visit Date UTC", "Visit Type", "Session"])
     for id in historyvisits:
         templist = [str(id), historyvisits[id][0], historyvisits[id][1], historyvisits[id][2],historyvisits[id][3],historyvisits[id][4], historyvisits[id][5]]
@@ -332,7 +332,7 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
 
     write_to_infoscreen("Writing history file `inputhistory.csv")
     inputhistoryfile = (os.path.join(outputpath,"inputhistory.csv"))
-    writer = csv.writer(open(inputhistoryfile, "w", encoding="utf-8"),"excel-tab")
+    writer = csv.writer(open(inputhistoryfile, "w", encoding="utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["Place ID", "Input", "Use Count", "Connected URL"])
     for i in range(0,len(inputhistory),4):
         templist = [inputhistory[i], inputhistory[i+1], inputhistory[i+2], inputhistory[i+3]]
@@ -340,42 +340,42 @@ def writefiles(outputpath, places, historyvisits,inputhistory, bookmarks, cookie
 
     write_to_infoscreen("Writing cookies file `bookmarks.csv'")
     bookmarksfile = (os.path.join(outputpath, "bookmarks.csv"))
-    writer = csv.writer(open(bookmarksfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(bookmarksfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Type", "FK", "Parent", "Position", "Title", "Keyword ID", "Date Added UTC", "Date Added Local", "Last Modified UTC", "Last Modified Local", "GUID"])
     for id in bookmarks:
         writer.writerow([str(id), bookmarks[id][0], bookmarks[id][1], bookmarks[id][2],bookmarks[id][3],bookmarks[id][4], bookmarks[id][5], bookmarks[id][6], bookmarks[id][7], bookmarks[id][8],bookmarks[id][9],bookmarks[id][10]])
 
     write_to_infoscreen("Writing cookies file `cookies.csv'")
     cookiesfile = (os.path.join(outputpath,"cookies.csv"))
-    writer = csv.writer(open(cookiesfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(cookiesfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Name", "Value", "Host", "Path", "Expiry", "Last Accessed Local", "Last Accessed UTC", "Is Secure", "Is HTTP Only", "Base Domain", "Creation Time Local", "Creation Time UTC"])
     for id in cookies:
         writer.writerow([str(id), cookies[id][0], cookies[id][1], cookies[id][2],cookies[id][3],cookies[id][4], cookies[id][5], cookies[id][6], cookies[id][7], cookies[id][8],cookies[id][9],cookies[id][10],cookies[id][11]])
 
     write_to_infoscreen("Writing saved logins file `signons.csv'")
     signonsfile = (os.path.join(outputpath,"signons.csv"))
-    writer = csv.writer(open(signonsfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(signonsfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Hostname", "Http Realm", "Form Submit URL", "Username Field", "Password Field", "Encrypted Username", "Encrypted Password", "GUID", "Enc Type", "Time Created Local","Time Created UTC", "Time Last Used Local", "Time Last Used UTC", "Time Password Changed Local", "Time Password Changed UTC", "Times Used"])
     for id in signonslogin:
         writer.writerow([str(id), signonslogin[id][0], signonslogin[id][1], signonslogin[id][2],signonslogin[id][3],signonslogin[id][4], signonslogin[id][5], signonslogin[id][6], signonslogin[id][7], signonslogin[id][8],signonslogin[id][9],signonslogin[id][10],signonslogin[id][11],signonslogin[id][12],signonslogin[id][13],signonslogin[id][14],signonslogin[id][15]])
 
     write_to_infoscreen("Writing disabled logins file `signons_disabled.csv'")
     signonsdisabledfile = (os.path.join(outputpath,"signons_disabled.csv"))
-    writer = csv.writer(open(signonsdisabledfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(signonsdisabledfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Hostname"])
     for id in signonsdisabled:
         writer.writerow([str(id), signonsdisabled[id][0]])
 
     write_to_infoscreen("Writing formhistory file `formhistory.csv'")
     formhistoryfile = (os.path.join(outputpath,"formhistory.csv"))
-    writer = csv.writer(open(formhistoryfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(formhistoryfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Fieldname", "Value", "Times Used", "First Used Local", "First Used UTC", "Last Used Local", "Last Used UTC", "GUID"])
     for id in formhistory:
         writer.writerow([str(id), formhistory[id][0], formhistory[id][1], formhistory[id][2],formhistory[id][3],formhistory[id][4], formhistory[id][5], formhistory[id][6], formhistory[id][7]])
 
     write_to_infoscreen("Writing downloads file `downloads.csv'")
     downloadsfile = (os.path.join(outputpath,"downloads.csv"))
-    writer = csv.writer(open(downloadsfile, "w", encoding = "utf-8"),"excel-tab")
+    writer = csv.writer(open(downloadsfile, "w", encoding = "utf-8"),"excel-tab") #TODO: newline="" for Windows?
     writer.writerow(["ID", "Name", "Source", "Target", "Temp Path", "Start Time Local", "Start Time UTC", "End Time Local", "End Time UTC", "State", "referrer", "Entity ID", "Bytes Downloaded", "Total Filesize", "Mime Type", "Preferred Application", "Preferred Action", "Auto Resume"])
     for id in downloads:
         writer.writerow([str(id), downloads[id][0], downloads[id][1], downloads[id][2],downloads[id][3],downloads[id][4], downloads[id][5], downloads[id][6], downloads[id][7], downloads[id][8],downloads[id][9],downloads[id][10],downloads[id][11],downloads[id][12],downloads[id][13],downloads[id][14],downloads[id][15],downloads[id][16]])
