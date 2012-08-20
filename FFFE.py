@@ -579,6 +579,6 @@ writefiles()
 
 
 #TODO: Parse Bookmarks Backupfolder, json files, http://jsonformatter.curiousconcept.com/
-#TODO: crack passwords, https://github.com/pradeep1288/ffpasscracker
+#TODO: crack passwords, https://github.com/pradeep1288/ffpasscracker, http://www.mozilla.org/projects/security/pki/nss/
 #TODO: Extensions.ini
 #TODO: Stay Frosty!
