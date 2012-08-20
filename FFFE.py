@@ -395,7 +395,7 @@ def checkpaths(sqlitepath, outputpath):
         window_main.mainloop()
     try:
         #checkfile = open(sqlitepath + "\places.sqlite", "r")
-        checkfile = open(os.path.join(sqlitepath, "places.sqlite"), "r") #TODO: Die anderen Pfadüberprüfungen auch so machen
+        checkfile = open(os.path.join(sqlitepath, "places.sqlite"), "r")
         #print(checkfile)
         checkfile.close()
         write_to_infoscreen("places.sqlite found")
